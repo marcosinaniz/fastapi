@@ -14,6 +14,9 @@ from tensorflow.keras.models import Model
 from tensorflow.keras import backend as K
 import tensorflow as tf
 
+vgg16 = VGG16(weights='imagenet')
+vgg16.save('vgg16.h5')
+
 def prepare_img_224(img_path):
     img = load_img(img_path, target_size=(224, 224))
     x = img_to_array(img)
