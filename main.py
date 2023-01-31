@@ -2,6 +2,20 @@ from fastapi import FastAPI, File, UploadFile
 import os
 from car_check import prepare_img_224, car_categories_check
 from damage_check import prepare_flat, car_damage_check
+import subprocess
+
+model_file = 'model.h5'
+
+if os.path.isfile(model_file):
+    print(f"{model_file} already exists in the current directory.")
+else:
+    url = "https://media.githubusercontent.com/media/marcosinaniz/fastapi/main/vgg16.h5"
+    print(f"{model_file} not found. Downloading from {url}...")
+    try:
+        subprocess.run(['curl', '--output', model_file, url])
+        print(f"{model_file} successfully downloaded.")
+    except Exception as e:
+        print(f"Failed to download {model_file}: {e}")
 
 app = FastAPI()
 UPLOAD_FOLDER = "testimages"

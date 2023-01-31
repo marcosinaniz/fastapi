@@ -14,6 +14,10 @@ from tensorflow.keras.models import Model
 from tensorflow.keras import backend as K
 import tensorflow as tf
 
+#import subprocess
+#if not os.path.isfile('model.h5'):
+#    subprocess.run(['curl --output model.h5 "https://media.githubusercontent.com/media/marcosinaniz/fastapi/main/vgg16.h5"'], shell=True)
+
 #global vgg16
 #vgg16 = VGG16(weights='imagenet')
 
@@ -50,7 +54,7 @@ def get_predictions(preds, top=5):
     return results
 
 def car_categories_check(img_224):
-    first_check = load_model('vgg16.h5')
+    first_check = load_model('model.h5')
     print ("Validating that this is a picture of your car...")
     out = first_check.predict(img_224)
     #out = vgg16.predict(img_224)
