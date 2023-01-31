@@ -14,8 +14,8 @@ from tensorflow.keras.models import Model
 from tensorflow.keras import backend as K
 import tensorflow as tf
 
-global vgg16
-vgg16 = VGG16(weights='imagenet')
+#global vgg16
+#vgg16 = VGG16(weights='imagenet')
 
 def prepare_img_224(img_path):
     img = load_img(img_path, target_size=(224, 224))
@@ -50,10 +50,10 @@ def get_predictions(preds, top=5):
     return results
 
 def car_categories_check(img_224):
-    #first_check = load_model('vgg16.h5')
+    first_check = load_model('vgg16.h5')
     print ("Validating that this is a picture of your car...")
-    #out = first_check.predict(img_224)
-    out = vgg16.predict(img_224)
+    out = first_check.predict(img_224)
+    #out = vgg16.predict(img_224)
     top = get_predictions(out, top=5)
     for j in top[0]:
         if j[0:2] in cat_list:
